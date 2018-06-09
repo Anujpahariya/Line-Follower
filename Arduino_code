@@ -1,0 +1,68 @@
+
+int in1,in3;
+
+
+int S1 = 8;
+
+int S3 = 7;
+int dc1=5,dc2=9,dc11=6,dc22=10;
+void setup() {
+  // put your setup code here, to run once:
+  
+Serial.begin(9600);
+//input from ir sensor
+pinMode(S1,INPUT);  
+pinMode(S3,INPUT);
+//dc motor 1
+pinMode(dc1,OUTPUT);
+pinMode(dc11,OUTPUT);
+//dc motor 2
+pinMode(dc2,OUTPUT);
+pinMode(dc22,OUTPUT);
+//pins for enable and Vcc
+pinMode(2,OUTPUT);//enable
+pinMode(3,OUTPUT);//Vcc 1
+pinMode(13,OUTPUT);//Vcc 2
+digitalWrite(2,HIGH);
+digitalWrite(3,HIGH);
+digitalWrite(13,HIGH);
+  
+}
+  
+ void loop()   
+{
+  in1=digitalRead(S1);
+  in3=digitalRead(S3);
+//  Serial.println(in1);
+
+if(in1==1 && in3==1){
+  //forward
+  analogWrite(dc1,255);
+  analogWrite(dc11,0);
+  analogWrite(dc2,255);
+  analogWrite(dc22,0);
+}
+else if(in1==0 && in3==1){
+ //left
+  analogWrite(dc1,0);
+  analogWrite(dc11,110);
+  analogWrite(dc2,255);
+  analogWrite(dc22,0);
+  
+  }
+  else if(in3==0 && in1==1){
+   //right
+  analogWrite(dc1,255);
+  analogWrite(dc11,0);
+  analogWrite(dc2,0);
+  analogWrite(dc22,110);
+ 
+  }
+
+  
+}
+
+  
+
+
+
